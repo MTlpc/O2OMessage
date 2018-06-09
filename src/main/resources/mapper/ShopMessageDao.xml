@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.learn.dao.ShopMessageDao">
+
+    <resultMap id="ShopMessageList" type="com.ssm.learn.entity.ShopMessage">
+        <id column="shop_id" property="shopId" jdbcType="INTEGER"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_desc" property="shopDesc" jdbcType="VARCHAR"/>
+        <result column="shop_addr" property="shopAddr" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="enable_status" property="enableStatus" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryShopList" resultMap="ShopMessageList">
+        SELECT shop_id, shop_name, shop_desc, shop_addr, phone, enable_status FROM tb_shop WHERE enable_status=0
+    </select>
+
+    <update id="updateMessage" parameterType="int">
+        update tb_shop set enable_status=1 where shop_id=#{_parameter}
+    </update>
+
+</mapper>
